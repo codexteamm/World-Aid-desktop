@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="740.0" style="-fx-background-color: #ffff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="main.UIController">
+   <children>
+      <VBox layoutX="394.0" prefHeight="500.0" prefWidth="346.0" style="-fx-background-color: #72CCC4;" />
+      <Label layoutX="23.0" layoutY="67.0" text="User Login">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_LEFT" layoutX="42.0" layoutY="135.0" prefHeight="35.0" prefWidth="300.0" style="-fx-border-color: #BEBFC1; -fx-background-radius: 5px; -fx-border-radius: 5px;">
+         <children>
+            <FontAwesomeIcon glyphName="ENVELOPE_ALT" glyphStyle="-fx-fill;" />
+         </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
