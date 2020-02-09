@@ -41,7 +41,7 @@ public class BenevoleCRUD {
 
     }
 
-    public List<Benevole> afficherBenevole() {
+    public List<Benevole> displayAllBenevole() {
         ArrayList<Benevole> ben = new ArrayList<>();
         try {
 
@@ -103,6 +103,30 @@ public class BenevoleCRUD {
             System.out.println("Mise à jour effectuée avec succès");
         } catch (SQLException ex) {
             System.out.println("erreur lors de la mise à jour " + ex.getMessage());
+        }
+    }
+            public Benevole findBenevoleById(int idBenevole) {
+          String requete = "select * from Benevole where idBenevole=?";
+         Benevole b  = new Benevole();
+      
+        try {
+            PreparedStatement ps = cn2.prepareStatement(requete);
+            ps.setInt(1, idBenevole);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                 b.setIdBenevole(rs.getInt("idBenevole"));
+                b.setNom(rs.getString("nom"));
+                b.setPrenom(rs.getString("prenom"));
+                b.setPays(rs.getString("pays"));
+                b.setMail(rs.getString("mail"));
+                b.setMdp(rs.getString("Mdp"));
+                b.setDateNaissance(rs.getTimestamp("dateNaissance").toLocalDateTime());
+            }
+            return b;
+
+        } catch (SQLException ex) {
+            System.out.println("erreur lors de la recherche d'benevole" + ex.getMessage());
+            return null;
         }
     }
 
