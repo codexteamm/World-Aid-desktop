@@ -12,6 +12,8 @@ package edu.wordaid.entities;
 public class CasSocial extends User{
  private String descriptionCasSocial;
   private boolean valide;
+private int idCampement ;// TO DO itzidha fil fil 5idma il kol
+
 
     public String getDescriptionCasSocial() {
         return descriptionCasSocial;
@@ -29,9 +31,18 @@ public class CasSocial extends User{
         this.valide = valide;
     }
 
-    public CasSocial(String descriptionCasSocial, String userName, String mdp) {
+    public int getIdCampement() {
+        return idCampement;
+    }
+
+    public void setIdCampement(int idCampement) {
+        this.idCampement = idCampement;
+    }
+
+    public CasSocial(String descriptionCasSocial, String userName, String mdp, int idCampement) {
         super( userName, mdp, 3);
         this.descriptionCasSocial = descriptionCasSocial;
+        this.idCampement=idCampement;
         this.valide = false;
     }
 

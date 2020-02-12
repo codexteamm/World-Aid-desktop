@@ -7,10 +7,7 @@ package edu.wordaid.entities;
 
 import java.util.Objects;
 
-/**
- *
- * @author HP
- */
+
 public class User {
     private int id;
     private String userName;

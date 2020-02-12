@@ -78,13 +78,15 @@ public class UserCrud {
                     break;
                 case 3:
                     CasSocial c = (CasSocial) u;
-                    requete2 = "INSERT INTO user (userName ,mdp,type,descriptionCasSocial,valide)VALUES (?,?,?,?,?)";
+                    requete2 = "INSERT INTO user (userName ,mdp,type,descriptionCasSocial,valide,idcampement )VALUES (?,?,?,?,?,?)";
                     pst = connection.prepareStatement(requete2);
                     pst.setString(1, c.getUserName());
                     pst.setString(2, c.getMdp());
                     pst.setInt(3, c.getType());
+                    
                     pst.setString(4, c.getDescriptionCasSocial());
                     pst.setBoolean(5, c.getValide());
+                    pst.setInt(6, c.getIdCampement());
                     pst.executeUpdate();
 
                     break;
@@ -151,7 +153,7 @@ public class UserCrud {
 
     public void updateCasSocial(CasSocial c, int idCasSocial) {
         try {
-            String reqUpdate = "UPDATE user SET nom=? , prenom=? ,pays=? ,mail=? , mdp=? ,dateNaissance=? ,userName=? ,type=?  where idBenevole=? ";
+            String reqUpdate = "UPDATE user SET nom=? , prenom=? ,pays=? ,mail=? , mdp=? ,dateNaissance=? ,userName=? ,type=? ,idcampement=?  where idBenevole=? ";
             PreparedStatement pst = connection.prepareStatement(reqUpdate);
 
             pst.setString(1, c.getUserName());
@@ -159,7 +161,8 @@ public class UserCrud {
             pst.setInt(3, c.getType());
             pst.setString(4, c.getDescriptionCasSocial());
             pst.setBoolean(5, c.getValide());
-            pst.setInt(6, idCasSocial);
+            pst.setInt(6, c.getIdCampement());
+            pst.setInt(7, idCasSocial);
 
             System.out.println("Mise à jour effectuée avec succès");
         } catch (SQLException ex) {
@@ -174,6 +177,7 @@ public class UserCrud {
             ps.setInt(1, id);
             User u = new User();
             ResultSet rs = ps.executeQuery();
+            
             while (rs.next()) {
 
                 switch (rs.getInt("type")) {
@@ -216,6 +220,7 @@ public class UserCrud {
                         c.setUserName(rs.getString("username"));
                         c.setDescriptionCasSocial(rs.getString("descriptionCasSocial"));
                         c.setValide(rs.getBoolean("valide"));
+                        c.setIdCampement(rs.getInt("idcampement"));
 
                         return c;
 
@@ -251,7 +256,7 @@ public class UserCrud {
                    return false;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("probleme checkuserName"+ex.getMessage());
         }
          return true;
     }

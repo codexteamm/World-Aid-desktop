@@ -101,7 +101,7 @@ public class Association extends User{
 
     @Override
     public String toString() {
-        return super.toString()+"Association{" + "nomAssociaiton=" + nomAssociaiton + ", rib=" + rib + ", addresse=" + addresse + ", categorie=" + categorie + ", mail=" + mail + ", logo=" + logo + ", numero=" + numero + ", valide=" + valide + '}';
+        return "Association{"+super.toString() + "nomAssociaiton=" + nomAssociaiton + ", rib=" + rib + ", addresse=" + addresse + ", categorie=" + categorie + ", mail=" + mail + ", logo=" + logo + ", numero=" + numero + ", valide=" + valide + '}';
     }
 
 
