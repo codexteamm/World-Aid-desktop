@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.wordaid.services;
+package edu.worldaid.services;
 
-import edu.wordaid.entities.Association;
-import edu.wordaid.entities.Benevole;
-import edu.wordaid.entities.CasSocial;
-import edu.wordaid.entities.User;
-import edu.wordaid.utils.MyConnection;
+import edu.worldaid.entities.Association;
+import edu.worldaid.entities.Benevole;
+import edu.worldaid.entities.CasSocial;
+import edu.worldaid.entities.User;
+import edu.worldaid.utils.MyConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

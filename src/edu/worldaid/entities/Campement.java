@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.wordaid.entities;
+package edu.worldaid.entities;
 
 import java.util.Objects;
 
@@ -123,8 +123,8 @@ public class Campement {
 
     @Override
     public String toString() {
-        return "Campement{" + "id=" + id + ", nom=" + nom + ", paye=" + paye + ", latitude=" + latitude + ", longitude=" + longitude + ", description=" + description + '}';
-    }
+        return this.nom;
+                }
 
     
     
