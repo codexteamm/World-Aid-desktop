@@ -24,8 +24,10 @@ public class WorldAid extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        //Parent root = FXMLLoader.load(getClass().getResource("mapsC.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("addCampement.fxml"));
+        
+        Parent root = FXMLLoader.load(getClass().getResource("displayCamps.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("Add_Campement.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("campSupported.fxml"));
         
         Scene scene = new Scene(root);
         

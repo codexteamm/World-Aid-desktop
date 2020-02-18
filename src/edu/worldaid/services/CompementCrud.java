@@ -5,8 +5,11 @@
  */
 package edu.worldaid.services;
 
+import edu.worldaid.entities.Administrateur;
 import edu.worldaid.entities.Association;
+import edu.worldaid.entities.Benevole;
 import edu.worldaid.entities.Campement;
+import edu.worldaid.entities.CasSocial;
 import edu.worldaid.entities.User;
 import edu.worldaid.utils.MyConnection;
 import java.sql.Connection;
@@ -255,7 +258,123 @@ public class CompementCrud {
             return null;
         }
     }
+            public boolean Checkprendreencharge(int idAssoc , int idcampement) {
+        Campement c = new Campement();
+        String requete = "SELECT *  FROM prendreencharge WHERE 	idcampement=? AND idassociation=? ";
 
+        try {
+            PreparedStatement ps = cn2.prepareStatement(requete);
+            ps.setInt(1, idcampement);
+            ps.setInt(2, idAssoc);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+
+            }
+            
+
+        } catch (SQLException ex) {
+            System.out.println("erreur lors de la recherche du Campement " + ex.getMessage());
+            
+        }
+        return false;
+    }
+        public boolean CheckCampementName(String name) {
+        Campement c = new Campement();
+        String requete = "SELECT *  FROM campement WHERE nom=? ";
+
+        try {
+            PreparedStatement ps = cn2.prepareStatement(requete);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+
+            }
+            
+
+        } catch (SQLException ex) {
+            System.out.println("erreur lors de la recherche du Campement " + ex.getMessage());
+            
+        }
+        return false;
+    }
+public User getConnectedUser()
+    {
+        String requete = "select * from login ";
+        try {
+            PreparedStatement ps = cn2.prepareStatement(requete);
+            
+            User u = new User();
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+
+                switch (rs.getInt("type")) {
+                    case 1:
+                        Benevole b = new Benevole();
+                        b.setId(rs.getInt("id"));
+                        b.setType(rs.getInt("type"));
+                        b.setMdp(rs.getString("Mdp"));
+                        b.setUserName(rs.getString("username"));
+                        b.setNom(rs.getString("nom"));
+                        b.setPrenom(rs.getString("prenom"));
+                        b.setPays(rs.getString("pays"));
+                        b.setMail(rs.getString("mail"));
+
+                        b.setDateNaissance(rs.getTimestamp("dateNaissance").toLocalDateTime());
+                        return b;
+
+                    case 2:
+                        Association a = new Association();
+                        a.setId(rs.getInt("id"));
+                        a.setType(rs.getInt("type"));
+                        a.setMdp(rs.getString("Mdp"));
+                        a.setUserName(rs.getString("username"));
+                        a.setNomAssociaiton(rs.getString("nomAssociaiton"));
+                        a.setRib(rs.getString("rib"));
+                        a.setAddresse(rs.getString("addresse"));
+                        a.setCategorie(rs.getString("categorie"));
+                        a.setMail(rs.getString("mail"));
+                        a.setLogo(rs.getString("logo"));
+                        a.setNumero(rs.getInt("numero"));
+                        a.setValide(rs.getBoolean("valide"));
+
+                        return a;
+
+                    case 3:
+                        CasSocial c = new CasSocial();
+                        c.setId(rs.getInt("id"));
+                        c.setType(rs.getInt("type"));
+                        c.setMdp(rs.getString("Mdp"));
+                        c.setUserName(rs.getString("username"));
+                        c.setDescriptionCasSocial(rs.getString("descriptionCasSocial"));
+                        c.setValide(rs.getBoolean("valide"));
+                        c.setIdCampement(rs.getInt("idcampement"));
+
+                        return c;
+
+                    case 4: {
+                        Administrateur A = new Administrateur();
+                        A.setId(rs.getInt("id"));
+                        A.setType(rs.getInt("type"));
+                        A.setMdp(rs.getString("Mdp"));
+                        A.setUserName(rs.getString("username"));
+                        return A;
+
+                    }
+                }
+
+            }
+            return null;
+
+        } catch (SQLException ex) {
+            System.out.println("erreur lors de la recherche d'un benevole" + ex.getMessage());
+            return null;
+        }
+    }
+        
+        
 
 
 }

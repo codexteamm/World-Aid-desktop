@@ -2,6 +2,27 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/entities/Benevole.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/campSupported.fxml</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/webmaps.html</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/entities/Association.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/campsupported.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/Add_CampementController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/services/CompementCrud.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/entities/User.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/displayCamps.fxml</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/services/AdminCrud.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/DisplaycampsController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/services/demande_aideCRUD.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/style.css</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/campadded.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/campadded.fxml</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/Add_Campement.fxml</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/mapsCController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/services/UserCrud.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/addmaps.html</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/WorldAid.java</file>
+        </group>
     </open-files>
 </project-private>

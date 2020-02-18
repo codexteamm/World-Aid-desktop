@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.worldaid.controllers.campsupported">
+   <children>
+      <Pane layoutX="-4.0" prefHeight="89.0" prefWidth="420.0" style="-fx-background-color: #0000;">
+         <children>
+            <Label fx:id="type" layoutX="159.0" layoutY="23.0" prefHeight="56.0" prefWidth="178.0" text="camp supported">
+               <font>
+                  <Font name="Montserrat-Regular" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="40.0" fitWidth="61.0" layoutX="80.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/icons8_Xbox_Menu_32px.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button fx:id="CancelButton" layoutX="-1.0" layoutY="97.0" mnemonicParsing="false" onAction="#annuler" prefHeight="74.0" prefWidth="364.0" stylesheets="@style.css" text="ok" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

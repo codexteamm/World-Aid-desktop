@@ -61,6 +61,8 @@ public class mapsCController implements Initializable {
     private void predreChargeE(ActionEvent event) {
 
         System.out.println("prendre en charge: " + selected.getNom()+selected.getId());
+        CompementCrud cc =new CompementCrud();
+        cc.addPrendreEnCharge(selected.getId(), 0);
         
 
     }

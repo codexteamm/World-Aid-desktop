@@ -59,7 +59,7 @@ public class UserCrud {
                 case 2:
                     Association a = (Association) u;
 
-                    requete2 = "INSERT INTO user (userName ,mdp,type,nomAssociaiton,rib,categorie,mail,logo,numero,valide ,addresse)VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                    requete2 = "INSERT INTO login (userName ,mdp,type,nomAssociaiton,rib,categorie,mail,logo,numero,valide ,addresse)VALUES (?,?,?,?,?,?,?,?,?,?,?)";
                     pst = connection.prepareStatement(requete2);
                     pst.setString(1, a.getUserName());
                     pst.setString(2, a.getMdp());
