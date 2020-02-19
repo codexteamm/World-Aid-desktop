@@ -39,6 +39,8 @@ public class CompementCrud {
 
     public void addCompement(Campement c) {
         try {
+            
+            System.out.println(c.getNom()+c.getDescription()+c.getPaye()+c.getLongitude()+c.getLatitude());
             PreparedStatement pst;
             String requete2;
             requete2 = "INSERT INTO campement (nom, description, paye,longitude,Latitude )VALUES (?,?,?,?,?)";
@@ -89,21 +91,19 @@ public class CompementCrud {
 
     }
 
-    public void updateCompement(Campement c, int id) {
+    public void updateCompement( int id , String desc) {
         try {
             PreparedStatement pst;
-            String reqUpdate = "UPDATE Campement SET nom=? ,description=? ,paye=? ,longitude=? ,latitude=? where id=? ";
+            String reqUpdate = "UPDATE Campement SET description=?  where id=? ";
 
             PreparedStatement preparedStatement = cn2.prepareStatement(reqUpdate);
             pst = cn2.prepareStatement(reqUpdate);
             
-            pst.setString(1, c.getNom());
-            pst.setString(2, c.getDescription());
-            pst.setString(3, c.getPaye());
+
+            pst.setString(1, desc);
+          pst.setInt(2, id);
             
-            pst.setDouble(4, c.getLongitude());
-            pst.setDouble(5, c.getLatitude());
-            pst.setInt(6, id);
+
             pst.executeUpdate();
             
             System.out.println("Mise à jour effectuée avec succès");

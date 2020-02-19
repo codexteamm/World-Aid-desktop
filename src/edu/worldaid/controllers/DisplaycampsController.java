@@ -8,6 +8,7 @@ package edu.worldaid.controllers;
 import edu.worldaid.entities.Association;
 import edu.worldaid.entities.Campement;
 import edu.worldaid.services.CompementCrud;
+import edu.worldaid.utils.JavamailUtilCampement;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -77,7 +78,16 @@ public class DisplaycampsController implements Initializable {
     private ImageView pic12;
     @FXML
     private Button Add_Camps;
-  
+    @FXML
+    private Button reloadB;
+    @FXML
+    private Button update;
+    @FXML
+    private Button delate;
+    @FXML
+    private Button supportedCamps;
+    @FXML
+    private ImageView pic121;
 
     /**
      * Initializes the controller class.
@@ -89,32 +99,37 @@ public class DisplaycampsController implements Initializable {
         username.setText(ass.getNomAssociaiton());
 
         predreChargeE.setDisable(true);
+        update.setDisable(true);
+        delate.setDisable(true);
+        
+        
+        
         WebEngine webEngine = webView.getEngine();
 
         URL url1 = this.getClass().getResource("/edu/worldaid/controllers/webmaps.html");
-
         webEngine.load(url1.toString());
         webEngine.setJavaScriptEnabled(true);
 
         List<Campement> list = cc.displayAllCampement();
         listView.getItems().addAll(list);
-
         listView.getSelectionModel().selectedItemProperty().addListener(
                 (ObservableValue<? extends Campement> ov, Campement old_val, final Campement new_val) -> {
                     predreChargeE.setDisable(false);
+                    update.setDisable(false);
+                    delate.setDisable(false);
+                    
                     selected = new_val;
                     try {
                         System.out.println("Selected item: " + new_val.getDescription());
                         System.out.println("addpopup(" + new_val.getLatitude() + "," + new_val.getLongitude() + ",'" + new_val.getDescription() + "')");
                         webEngine.executeScript("addpopup(" + new_val.getLatitude() + "," + new_val.getLongitude() + ",'" + new_val.getDescription() + "')");
                     } catch (Exception e) {
-                        System.out.println("problem with script"+ e.getMessage());
+                        System.out.println("problem with script" + e.getMessage());
                     }
 
                 });
 
     }
-
 
     @FXML
     private void Show_Home(ActionEvent event) {
@@ -167,42 +182,43 @@ public class DisplaycampsController implements Initializable {
 
         CompementCrud cc = new CompementCrud();
         Association asss = (Association) cc.getConnectedUser();
-        
-       if (cc.Checkprendreencharge(asss.getId(), selected.getId()))
-       {
-           
-               /* FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/campalreadysupported.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();*/
-      
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/campalreadysupported.fxml"));
-            Parent root= loader.load();
-            campalreadysupported dpc = loader.getController();
-            dpc.idass=asss.getId();
-            dpc.idcamp=selected.getId();
-           
-              Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle("ABC");
-        stage.setScene(new Scene(root));
-        stage.show();
-           
-           
-           
-       }else{
-                   cc.addPrendreEnCharge(selected.getId(), asss.getId());
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/campSupported.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle("ABC");
-        stage.setScene(new Scene(root1));
-        stage.show();
-           
-       }
-          
+        if (cc.Checkprendreencharge(asss.getId(), selected.getId())) {
+
+            /* FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/campalreadysupported.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();*/
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/campalreadysupported.fxml"));
+            Parent root = loader.load();
+            campalreadysupported dpc = loader.getController();
+            dpc.idass = asss.getId();
+            dpc.idcamp = selected.getId();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("ABC");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } else {
+            cc.addPrendreEnCharge(selected.getId(), asss.getId());
+            JavamailUtilCampement mail = new JavamailUtilCampement();
+            try {
+                mail.sendMail(asss.getMail(),"you juste supported the camp "+selected.getNom());
+            } catch (Exception ex) {
+                Logger.getLogger(DisplaycampsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+     
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/campSupported.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("ABC");
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+        }
 
     }
 
@@ -244,6 +260,74 @@ public class DisplaycampsController implements Initializable {
         }
         searchfField.setText("");
 
+    }
+
+    @FXML
+    private void reloadbutton(ActionEvent event) {
+        System.out.println("reloadbutton cliked");
+        CompementCrud cc = new CompementCrud();
+        listView.getItems().clear();
+            listView.getItems().addAll(cc.displayAllCampement());
+    }
+
+    @FXML
+    private void updateb(ActionEvent event) {
+        try {
+            CompementCrud cc = new CompementCrud();
+            Association asss = (Association) cc.getConnectedUser();
+            System.out.println(asss.getId());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/updateCampement.fxml"));
+            Parent root = loader.load();
+            UpdateCpemnt dpc = loader.getController();
+            
+            dpc.idcamp = selected.getId();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("ABC");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(DisplaycampsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void delateb(ActionEvent event) {
+        try {
+            CompementCrud cc = new CompementCrud();
+            Association asss = (Association) cc.getConnectedUser();
+            System.out.println(asss.getId());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/delateCamp.fxml"));
+            Parent root = loader.load();
+            
+            DelateCamp dpc = loader.getController();
+            
+            dpc.idcamp = selected.getId();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("ABC");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(DisplaycampsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showSupportedCamps(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/showSupportedcamps.fxml"));
+            Parent root= loader.load();
+            SowSupportedController dpc = loader.getController();
+            
+            Home.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(DisplaycampsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

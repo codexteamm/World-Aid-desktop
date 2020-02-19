@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -68,8 +69,11 @@ public class Add_CampementController implements Initializable {
 
     @FXML
     private void exit(ActionEvent event) {
+        
             Stage stage = (Stage) exit.getScene().getWindow();
-    // do what you have to do
+          stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+
+    
     stage.close();
     }
 
@@ -118,7 +122,7 @@ public class Add_CampementController implements Initializable {
                 double lon = Double.parseDouble(longitude);
 
                 Campement camp = new Campement(nomc.getText(), lat, lon, descriptionc.getText(), paysc.getText());
-
+                   System.out.println(camp);
                 
 
                  cc.addCompement(camp);

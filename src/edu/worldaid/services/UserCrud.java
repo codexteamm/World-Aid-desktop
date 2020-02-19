@@ -106,6 +106,79 @@ public class UserCrud {
             System.out.println(ex);
         }
     }
+     public void inscriptionLogin(User u) {
+        try {
+            PreparedStatement pst;
+            String requete2;
+
+            switch (u.getType()) {
+
+                case 1:
+                    Benevole b = (Benevole) u;
+                    requete2 = "INSERT INTO login (nom ,prenom,pays ,mail,mdp,dateNaissance,userName,type)VALUES (?,?,?,?,?,?,?,?)";
+                    pst = connection.prepareStatement(requete2);
+
+                    pst.setString(1, b.getNom());
+                    pst.setString(2, b.getPrenom());
+                    pst.setString(3, b.getPays());
+                    pst.setString(4, b.getMdp());
+                    pst.setString(5, b.getMail());
+                    pst.setTimestamp(6, Timestamp.valueOf(b.getDateNaissance()));
+                    pst.setString(7, b.getUserName());
+                    pst.setInt(8, b.getType());
+                    pst.executeUpdate();
+                    break;
+
+                case 2:
+                    Association a = (Association) u;
+
+                    requete2 = "INSERT INTO login (userName ,mdp,type,nomAssociaiton,rib,categorie,mail,logo,numero,valide ,addresse)VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                    pst = connection.prepareStatement(requete2);
+                    pst.setString(1, a.getUserName());
+                    pst.setString(2, a.getMdp());
+                    pst.setInt(3, a.getType());
+                    pst.setString(4, a.getNomAssociaiton());
+                    pst.setString(5, a.getRib());
+                    pst.setString(6, a.getCategorie());
+                    pst.setString(7, a.getMail());
+                    pst.setString(8, a.getLogo());
+
+                    pst.setInt(9, a.getNumero());
+                    pst.setBoolean(10, a.getValide());
+                    pst.setString(11, a.getAddresse());
+                    pst.executeUpdate();
+
+                    break;
+                case 3:
+                    CasSocial c = (CasSocial) u;
+                    requete2 = "INSERT INTO login (userName ,mdp,type,descriptionCasSocial,valide,idcampement )VALUES (?,?,?,?,?,?)";
+                    pst = connection.prepareStatement(requete2);
+                    pst.setString(1, c.getUserName());
+                    pst.setString(2, c.getMdp());
+                    pst.setInt(3, c.getType());
+                    
+                    pst.setString(4, c.getDescriptionCasSocial());
+                    pst.setBoolean(5, c.getValide());
+                    pst.setInt(6, c.getIdCampement());
+                    pst.executeUpdate();
+
+                    break;
+                case 4:
+                    Administrateur A = (Administrateur) u;
+                    requete2 = "INSERT INTO login (mdp,username,type)VALUES (?,?,?)";
+                    pst = connection.prepareStatement(requete2);
+                    pst.setString(1, A.getMdp());
+                    pst.setString(2, A.getUserName());
+                    pst.setInt(3, A.getType());
+                    pst.executeUpdate();
+                    break;
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
 
     public void updateBenevole(Benevole b, int idBenevole) {
         try {
@@ -168,6 +241,30 @@ public class UserCrud {
         } catch (SQLException ex) {
             System.out.println("erreur lors de la mise à jour " + ex.getMessage());
         }
+    }
+    
+    public void login (String username, String mdp){
+        try {
+            String requete = "SELECT * from user where userName= ? mdp= ?";
+            
+            PreparedStatement ps = connection.prepareStatement(requete);
+            ps.setString(1, username);
+            ps.setString(1, mdp);
+            int id=0;
+            ResultSet rs = ps.executeQuery();
+            User u=new User();
+            
+            while (rs.next()) {
+                                        id =rs.getInt("id");
+                                        u=getUserbyid(id);
+                                        inscriptionLogin(u);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    
     }
 
     public User getUserbyid(int id) {
