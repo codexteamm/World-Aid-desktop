@@ -242,30 +242,112 @@ public class UserCrud {
             System.out.println("erreur lors de la mise à jour " + ex.getMessage());
         }
     }
-    
-    public void login (String username, String mdp){
+     public User getConnectedUser()
+    {
+        String requete = "select * from login";
         try {
-            String requete = "SELECT * from user where userName= ? mdp= ?";
+            PreparedStatement ps = connection.prepareStatement(requete);
             
+            User u = new User();
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+
+                switch (rs.getInt("type")) {
+                    case 1:
+                        Benevole b = new Benevole();
+                        b.setId(rs.getInt("id"));
+                        b.setType(rs.getInt("type"));
+                        b.setMdp(rs.getString("Mdp"));
+                        b.setUserName(rs.getString("username"));
+                        b.setNom(rs.getString("nom"));
+                        b.setPrenom(rs.getString("prenom"));
+                        b.setPays(rs.getString("pays"));
+                        b.setMail(rs.getString("mail"));
+
+                        b.setDateNaissance(rs.getTimestamp("dateNaissance").toLocalDateTime());
+                        return b;
+
+                    case 2:
+                        Association a = new Association();
+                        a.setId(rs.getInt("id"));
+                        a.setType(rs.getInt("type"));
+                        a.setMdp(rs.getString("Mdp"));
+                        a.setUserName(rs.getString("username"));
+                        a.setNomAssociaiton(rs.getString("nomAssociaiton"));
+                        a.setRib(rs.getString("rib"));
+                        a.setAddresse(rs.getString("addresse"));
+                        a.setCategorie(rs.getString("categorie"));
+                        a.setMail(rs.getString("mail"));
+                        a.setLogo(rs.getString("logo"));
+                        a.setNumero(rs.getInt("numero"));
+                        a.setValide(rs.getBoolean("valide"));
+
+                        return a;
+
+                    case 3:
+                        CasSocial c = new CasSocial();
+                        c.setId(rs.getInt("id"));
+                        c.setType(rs.getInt("type"));
+                        c.setMdp(rs.getString("Mdp"));
+                        c.setUserName(rs.getString("username"));
+                        c.setDescriptionCasSocial(rs.getString("descriptionCasSocial"));
+                        c.setValide(rs.getBoolean("valide"));
+                        c.setIdCampement(rs.getInt("idcampement"));
+
+                        return c;
+
+                    case 4: {
+                        Administrateur A = new Administrateur();
+                        A.setId(rs.getInt("id"));
+                        A.setType(rs.getInt("type"));
+                        A.setMdp(rs.getString("Mdp"));
+                        A.setUserName(rs.getString("username"));
+                        return A;
+
+                    }
+                }
+
+            }
+            return null;
+
+        } catch (SQLException ex) {
+            System.out.println("erreur lors de la recherche d'un benevole" + ex.getMessage());
+            return null;
+        }
+    }
+    
+    
+        
+    
+   public User login (String username, String mdp){
+         int type =0;
+         User u=new User();
+         
+        try {
+            String requete = "SELECT * from user where userName= ? AND mdp= ?";
+            System.out.println(username +mdp);
             PreparedStatement ps = connection.prepareStatement(requete);
             ps.setString(1, username);
-            ps.setString(1, mdp);
+            ps.setString(2, mdp);
             int id=0;
             ResultSet rs = ps.executeQuery();
-            User u=new User();
+            
             
             while (rs.next()) {
                                         id =rs.getInt("id");
                                         u=getUserbyid(id);
                                         inscriptionLogin(u);
+                                         type =rs.getInt("type");
 
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserCrud.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return u;
     
     }
+
 
     public User getUserbyid(int id) {
         String requete = "select * from user where id=?";

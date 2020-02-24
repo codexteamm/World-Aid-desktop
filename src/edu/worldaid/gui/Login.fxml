@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: white; -fx-background-radius: 7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.worldaid.controllers.LoginController">
+   <children>
+      <Label prefHeight="46.0" prefWidth="198.0" text="LOGIN" textFill="#72ccc4">
+         <font>
+            <Font name="Lato-Light" size="25.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="20.0" left="50.0" top="50.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER_LEFT">
+         <VBox.margin>
+            <Insets bottom="40.0" left="50.0" right="50.0" />
+         </VBox.margin>
+         <children>
+            <TextField fx:id="username" prefHeight="26.0" prefWidth="224.0" promptText="UserName" styleClass="loginInput" stylesheets="@styles.css" HBox.hgrow="ALWAYS" />
+            <ImageView fitHeight="18.0" fitWidth="18.0" opacity="0.26">
+               <image>
+                  <Image url="@../images/mail_icon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT">
+         <VBox.margin>
+            <Insets bottom="40.0" left="50.0" right="50.0" />
+         </VBox.margin>
+         <children>
+            <TextField fx:id="mdp" prefHeight="16.0" prefWidth="224.0" promptText="Password" styleClass="loginInput" stylesheets="@styles.css" HBox.hgrow="ALWAYS" />
+            <ImageView fitHeight="18.0" fitWidth="18.0" opacity="0.26">
+               <image>
+                  <Image url="@../images/password_icon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <Button fx:id="button_login" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="46.0" prefWidth="151.0" style="-fx-background-radius: 8; -fx-background-color: #72CCC4;" styleClass="button_Submit" stylesheets="@styles.css" text="Login" textFill="WHITE">
+         <font>
+            <Font name="Lato-Light" size="14.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="50.0" />
+         </VBox.margin>
+      </Button>
+      <Label alignment="CENTER" prefHeight="18.0" prefWidth="123.0" text="Forgot password?" textAlignment="CENTER" textFill="#72ccc4" underline="true" VBox.vgrow="ALWAYS">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font>
+         <VBox.margin>
+            <Insets left="110.0" right="50.0" top="70.0" />
+         </VBox.margin>
+      </Label>
+   </children>
+</VBox>

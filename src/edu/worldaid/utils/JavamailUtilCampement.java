@@ -64,7 +64,7 @@ public class JavamailUtilCampement {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("La listes des activités");
+            message.setSubject("World Aid");
             message.setText(Messagee);
             return message;
         } catch (MessagingException ex) {

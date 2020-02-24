@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -54,10 +56,6 @@ public class SowSupportedController implements Initializable {
     @FXML
     private Button Home;
     @FXML
-    private Button Show_My_Draft1;
-    @FXML
-    private Button Show_My_Draft;
-    @FXML
     private ImageView pic12;
     @FXML
     private Button supportedCamps;
@@ -80,6 +78,16 @@ public class SowSupportedController implements Initializable {
     @FXML
     private Button Unsupport;
     Campement selected;
+    @FXML
+    private Button add_and_event;
+    @FXML
+    private Button show_event;
+    @FXML
+    private Button showAllEvents;
+    @FXML
+    private Button settings;
+    @FXML
+    private Hyperlink help;
 
     /**
      * Initializes the controller class.
@@ -118,11 +126,17 @@ public class SowSupportedController implements Initializable {
 
     @FXML
     private void Show_Home(ActionEvent event) {
+      try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/AcceuilAssociation.fxml"));
+            Parent root = loader.load();
+            AcceuilAssociationController dpc = loader.getController();
+
+            Home.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(DisplaycampsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    @FXML
-    private void Show_Draft(ActionEvent event) {
-    }
 
     @FXML
     private void showSupportedCamps(ActionEvent event) {
@@ -245,6 +259,63 @@ public class SowSupportedController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(SowSupportedController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void add_an_event(ActionEvent event) {
+        try {
+            FXMLLoader detail = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/Add_Events.fxml"));
+            // System.out.println("err1");
+            Parent root2 = (Parent) detail.load();
+            //System.out.println("err2");
+            Stage stage1 = new Stage();
+            stage1.setScene(new Scene(root2));
+            //System.out.println("err3");
+            stage1.setOnCloseRequest(e -> Platform.exit());
+
+            stage1.show();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    @FXML
+    private void ShowEvents(ActionEvent event) {
+         try {
+            FXMLLoader detail = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/displayEvents.fxml"));
+            Parent root2 = (Parent) detail.load();
+            Stage stage1 = new Stage();
+            stage1.setScene(new Scene(root2));
+            stage1.setOnCloseRequest(e -> Platform.exit());
+            stage1.show();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    @FXML
+    private void showAllEvents(ActionEvent event) {
+        try {
+
+            FXMLLoader detail = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/displayAllEvents.fxml"));
+
+            Parent root2 = (Parent) detail.load();
+            Stage stage1 = new Stage();
+            stage1.setScene(new Scene(root2));
+            stage1.setOnCloseRequest(e -> Platform.exit());
+            stage1.show();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
+    @FXML
+    private void gotohelp(ActionEvent event) {
     }
 
 }

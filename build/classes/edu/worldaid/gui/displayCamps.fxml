@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -20,7 +21,7 @@
       <WebView fx:id="webView" layoutX="606.0" layoutY="111.0" prefHeight="482.0" prefWidth="494.0" />
         <VBox alignment="TOP_CENTER" prefHeight="704.0" prefWidth="300.0" styleClass="sidebar">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="706.0" prefWidth="300.0" style="-fx-background-color: #05071F;">
+            <VBox fx:id="menu" alignment="TOP_CENTER" prefHeight="706.0" prefWidth="300.0" style="-fx-background-color: #05071F;">
                <children>
                   <ImageView fx:id="Profile_pic" fitHeight="75.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -47,7 +48,7 @@
                         <Insets left="50.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="Show_My_Draft1" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Show_Draft" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../edu/worldaid/gui/style.css" text="show evnets">
+                  <Button fx:id="add_and_event" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#add_an_event" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../edu/worldaid/gui/style.css" text="add evnets">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,7 +60,19 @@
                         <Insets left="50.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="Show_My_Draft" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Show_Draft" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../edu/worldaid/gui/style.css" text="add evnets">
+                  <Button fx:id="show_event" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#ShowEvents" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../edu/worldaid/gui/style.css" text="Show My Events">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons8_Box_32px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="showAllEvents" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showAllEvents" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../edu/worldaid/gui/style.css" text="Show all Events">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -74,6 +87,21 @@
                   <Button fx:id="Add_Event2" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#Add_an_opportunity" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../edu/worldaid/gui/style.css" text="show camps" textFill="#e7e5e5">
                      <graphic>
                         <ImageView fx:id="pic12" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons8_Home_32px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="50.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="supportedCamps" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showSupportedCamps" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../edu/worldaid/gui/style.css" text="show supported camps" textFill="#e7e5e5">
+                     <graphic>
+                        <ImageView fx:id="pic121" fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../images/icons8_Home_32px.png" />
                            </image>
@@ -104,7 +132,7 @@
                         <Insets left="50.0" />
                      </padding>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showq" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../edu/worldaid/gui/style.css" text="Q and A">
+                  <Button fx:id="settings" alignment="BASELINE_LEFT" graphicTextGap="22.0" mnemonicParsing="false" onAction="#showq" prefHeight="42.0" prefWidth="259.0" stylesheets="@../../../edu/worldaid/gui/style.css" text="Settings">
                      <graphic>
                         <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -128,20 +156,32 @@
                         <Insets left="50.0" />
                      </padding>
                   </Button>
+                  <Hyperlink fx:id="help" onAction="#gotohelp" text="Help Center" />
+                  <Hyperlink text="Display Statistics" />
                </children>
             </VBox>
          </children>
         </VBox>
-      <HBox layoutX="311.0" layoutY="645.0" prefHeight="53.0" prefWidth="791.0">
+      <HBox layoutX="300.0" layoutY="635.0" prefHeight="54.0" prefWidth="802.0">
          <children>
             <HBox prefHeight="52.0" prefWidth="36.0" />
-            <HBox prefHeight="52.0" prefWidth="38.0" />
-            <Button fx:id="predreChargeE" mnemonicParsing="false" onAction="#predreChargeE" prefHeight="40.0" prefWidth="127.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="take charge" textFill="WHITE" translateX="250.0">
+            <HBox prefHeight="52.0" prefWidth="38.0">
+               <children>
+                  <ImageView fitHeight="23.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/realod.jpg" />
+                     </image>
+                  </ImageView>
+               </children></HBox>
+            <Button fx:id="reloadB" mnemonicParsing="false" onAction="#reloadbutton" prefHeight="40.0" prefWidth="127.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="reload" textFill="WHITE" />
+            <HBox prefHeight="53.0" prefWidth="68.0" />
+            <Button fx:id="predreChargeE" mnemonicParsing="false" onAction="#predreChargeE" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="take charge" textFill="WHITE">
                
             </Button>
-            <HBox prefHeight="52.0" prefWidth="38.0" />
             <HBox prefHeight="53.0" prefWidth="68.0" />
+            <Button fx:id="update" mnemonicParsing="false" onAction="#updateb" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="update" textFill="WHITE" />
             <HBox prefHeight="53.0" prefWidth="68.0" />
+            <Button fx:id="delate" mnemonicParsing="false" onAction="#delateb" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: #00A2D3;" stylesheets="@stylesheet.css" text="delate" textFill="WHITE" />
           
          </children>
       </HBox>
@@ -160,5 +200,6 @@
               </children>
           </Pane>
       <ListView fx:id="listView" layoutX="311.0" layoutY="114.0" prefHeight="475.0" prefWidth="293.0" />
+      <HBox layoutX="10.0" layoutY="10.0" prefHeight="53.0" prefWidth="68.0" />
     </children>
 </AnchorPane>
