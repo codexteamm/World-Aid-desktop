@@ -6,6 +6,7 @@
 package edu.worldaid.entities;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import java.util.Objects;
 
@@ -19,9 +20,9 @@ public class Benevole extends User {
    private String  prenom;
    private String  pays;
    private String  mail;
-   private LocalDateTime   dateNaissance;
+   private Date   dateNaissance;
 
-    public Benevole(String userName, String nom, String prenom, String pays, String mail, String mdp, LocalDateTime  dateNaissance) {
+    public Benevole(String userName, String nom, String prenom, String pays, String mail, String mdp, Date  dateNaissance) {
         super(userName,mdp,1 );
        
         this.nom = nom;
@@ -86,7 +87,7 @@ public class Benevole extends User {
         this.mail = mail;
     }
 
-    public void setDateNaissance(LocalDateTime dateNaissance) {
+    public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 
@@ -106,7 +107,7 @@ public class Benevole extends User {
         return mail;
     }
 
-    public LocalDateTime getDateNaissance() {
+    public Date getDateNaissance() {
         return dateNaissance;
     }
 

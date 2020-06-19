@@ -8,6 +8,7 @@ package edu.worldaid.controllers;
 import edu.worldaid.entities.Association;
 import edu.worldaid.entities.Campement;
 import edu.worldaid.services.CompementCrud;
+import edu.worldaid.services.UserCrud;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -21,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -88,6 +90,8 @@ public class SowSupportedController implements Initializable {
     private Button settings;
     @FXML
     private Hyperlink help;
+    @FXML
+    private Button Requests;
 
     /**
      * Initializes the controller class.
@@ -164,6 +168,21 @@ public class SowSupportedController implements Initializable {
 
     @FXML
     private void logoutbutton(ActionEvent event) {
+                try {
+            UserCrud uc = new UserCrud();
+            uc.logout();
+
+            Parent intDM = FXMLLoader.load(getClass().getResource("/edu/worldaid/gui/FXMLFirst.fxml"));
+            Scene intDmScene = new Scene(intDM);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(intDmScene);
+            window.show();
+
+        } catch (IOException ex) {
+
+            System.out.println("erreur logout"+ex.getMessage());
+
+        }
     }
 
     @FXML
@@ -316,6 +335,19 @@ public class SowSupportedController implements Initializable {
 
     @FXML
     private void gotohelp(ActionEvent event) {
+    }
+
+    @FXML
+    private void Requests(ActionEvent event) {
+             try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/displayRequests.fxml"));
+            Parent root = loader.load();
+            displayRequestsController dpc = loader.getController();
+
+            show_event.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(DisplaycampsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

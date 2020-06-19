@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: white; -fx-background-radius: 7;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: white; -fx-background-radius: 7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.worldaid.controllers.SignUpController">
    <children>
-      <Label prefHeight="46.0" prefWidth="198.0" text="S'INSCRIRE" textFill="#e81163">
+      <Label prefHeight="46.0" prefWidth="198.0" text="Sign Up  :" textFill="#72ccc4">
          <font>
             <Font name="Lato-Light" size="25.0" />
          </font>
@@ -21,70 +17,48 @@
             <Insets bottom="30.0" left="50.0" top="30.0" />
          </VBox.margin>
       </Label>
-      <HBox alignment="CENTER_LEFT">
-         <children>
-            <TextField prefHeight="26.0" prefWidth="224.0" promptText="Email" styleClass="loginInput">
-               <stylesheets>
-                  <URL value="@styles.css" />
-                  <URL value="@styles.css" />
-               </stylesheets>
-            </TextField>
-            <ImageView fitHeight="18.0" fitWidth="18.0" opacity="0.26">
-               <image>
-                  <Image url="@../images/mail_icon.png" />
-               </image>
-            </ImageView>
-         </children>
-         <VBox.margin>
-            <Insets bottom="60.0" left="50.0" right="50.0" top="-20.0" />
-         </VBox.margin>
-      </HBox>
-      <HBox alignment="CENTER_LEFT">
+      <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="274.0">
          <VBox.margin>
             <Insets bottom="60.0" left="50.0" right="50.0" top="-20.0" />
          </VBox.margin>
          <children>
-            <TextField prefHeight="16.0" prefWidth="224.0" promptText="Mot de passe" styleClass="loginInput" stylesheets="@styles.css">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></TextField>
-            <ImageView fitHeight="18.0" fitWidth="18.0" opacity="0.26">
-               <image>
-                  <Image url="@../images/password_icon.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
+            <Label text="As An Association : ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="inscriAssocia" mnemonicParsing="false" onAction="#inscriAssocia" prefHeight="43.0" prefWidth="127.0" style="-fx-background-radius: 8; -fx-background-color: #72CCC4;" styleClass="button_Submit" stylesheets="@styles.css" text="Sign up" textFill="WHITE" translateX="30.0">
+               <font>
+                  <Font name="Lato-Light" size="14.0" />
+               </font>
+            </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT">
+      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="266.0">
+         <VBox.margin>
+            <Insets bottom="60.0" left="50.0" right="50.0" top="-20.0" />
+         </VBox.margin>
          <children>
-            <TextField prefHeight="16.0" prefWidth="224.0" promptText="Vérification mdp" styleClass="loginInput" stylesheets="@styles.css">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </TextField>
-            <ImageView fitHeight="18.0" fitWidth="18.0" opacity="0.26">
-               <image>
-                  <Image url="@../images/password_icon.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
+            <Label text="As A Volunteer :" />
+            <Button fx:id="inscrioVolunteer" mnemonicParsing="false" onAction="#inscrioVolunteer" prefHeight="43.0" prefWidth="127.0" style="-fx-background-radius: 8; -fx-background-color: #72CCC4;" styleClass="button_Submit" stylesheets="@styles.css" text="Sign Up" textFill="WHITE" translateX="65.0">
+               <font>
+                  <Font name="Lato-Light" size="14.0" />
+               </font>
+            </Button>
          </children>
+      </HBox>
+      <HBox fx:id="inscriNeedy" alignment="CENTER_LEFT" onDragDetected="#inscriNeedy" prefHeight="74.0" prefWidth="250.0">
          <VBox.margin>
             <Insets bottom="40.0" left="50.0" right="50.0" top="-20.0" />
          </VBox.margin>
+         <children>
+            <Label text="As A Needy :" />
+            <Button fx:id="inscritneedy" mnemonicParsing="false" onAction="#inscritneedy" prefHeight="43.0" prefWidth="127.0" style="-fx-background-radius: 8; -fx-background-color: #72CCC4;" styleClass="button_Submit" stylesheets="@styles.css" text="Sign Up" textFill="WHITE" translateX="80.0">
+               <font>
+                  <Font name="Lato-Light" size="14.0" />
+               </font>
+            </Button>
+         </children>
       </HBox>
-      <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="134.0" style="-fx-background-radius: 8;" styleClass="button_Submit" stylesheets="@styles.css" text="S'INSCRIRE" textFill="WHITE">
-         <font>
-            <Font name="Lato-Light" size="14.0" />
-         </font>
-         <VBox.margin>
-            <Insets left="50.0" />
-         </VBox.margin>
-      </Button>
    </children>
 </VBox>

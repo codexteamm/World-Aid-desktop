@@ -12,14 +12,28 @@ package edu.worldaid.entities;
 public class feedback {
 
     private int id_feedback;
-    private int id_user;
+    private String titre;
     private String message;
+    private int etat;
 
-    public feedback(int id_user, String message) {
-        this.id_user = id_user;
+    public feedback(int id_feedback, String titre, String message) {
+        this.id_feedback = id_feedback;
+        this.titre = titre;
         this.message = message;
     }
 
+    public feedback(int id_feedback, String titre, String message, int etat) {
+        this.id_feedback = id_feedback;
+        this.titre = titre;
+        this.message = message;
+        this.etat = etat;
+    }
+
+    public int getEtat() {
+        return etat;
+    }
+
+    
     public feedback() {
     }
 
@@ -27,16 +41,12 @@ public class feedback {
         return id_feedback;
     }
 
-    public int getId_user() {
-        return id_user;
+    public String getTitre() {
+        return titre;
     }
 
     public String getMessage() {
         return message;
-    }
-
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
     }
 
     public void setId_feedback(int id_feedback) {
@@ -45,6 +55,15 @@ public class feedback {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public void setEtat(int etat) {
+        this.etat = etat;
+    }
+
+    
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     @Override
@@ -74,7 +93,9 @@ public class feedback {
 
     @Override
     public String toString() {
-        return "feedback{" + "id_feedback=" + id_feedback + ", id_user=" + id_user + ", message=" + message + '}';
+        return "feedback{" + "id_feedback=" + id_feedback + ", titre=" + titre + ", message=" + message + ", etat=" + etat + '}';
     }
+
+    
 
 }

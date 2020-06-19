@@ -259,7 +259,7 @@ public class UpdateEventController implements Initializable, MapComponentInitial
                 .zoom(8);
 
         map = mapView.createMap(mapOptions);
-        System.out.println("aaaaaaaaaaaaaaaa");
+   
     }
 
     @FXML
@@ -291,7 +291,7 @@ public class UpdateEventController implements Initializable, MapComponentInitial
                 .zoom(8);
 
         map = mapView.createMap(mapOptions);
-        System.out.println("aaaaaaaaaaaaaaaa");
+       
 
         //Placement du marqueur
         Map<String, Double> EventCoords;

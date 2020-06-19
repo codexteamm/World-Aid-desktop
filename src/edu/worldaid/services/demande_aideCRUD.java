@@ -5,7 +5,12 @@
  */
 package edu.worldaid.services;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+//import edu.worldaid.entities.cas_social;
+import edu.worldaid.entities.Administrateur;
+import edu.worldaid.entities.Association;
+import edu.worldaid.entities.Benevole;
+import edu.worldaid.entities.CasSocial;
+import edu.worldaid.entities.User;
 import edu.worldaid.entities.demande_aide;
 import edu.worldaid.utils.MyConnection;
 import java.sql.Connection;
@@ -49,7 +54,7 @@ public class demande_aideCRUD {
             PreparedStatement pst = cn2.prepareStatement(requete2);
             //pst.setInt(1, da.getId_demande());
             pst.setString(1, da.getTitre());
-            pst.setString(2, da.getDescription());
+            pst.setString(2, da.getDescription());  
             pst.setInt(3, da.getEtat());
             pst.executeUpdate();
             System.out.println("Demande d'aide ajoutée");
@@ -59,16 +64,8 @@ public class demande_aideCRUD {
         }
     }
 
-    /*public void supprimerDemandeAide(demande_aide d) {
-        try {
-            //int idd = d.getId_demande();
-            String requete3 = "DELETE FROM demande_aide WHERE id_demande = " + d.getId_demande() + ";";
-            PreparedStatement pst2 = cn2.prepareStatement(requete3);
-            pst2.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }*/
+    
+    
     public void supprimerDemandeAide2(int id) {
         String requete2 = "DELETE FROM demande_aide WHERE id_demande = ?";
         try {
@@ -86,23 +83,8 @@ public class demande_aideCRUD {
         }
     }
 
-    /*public void supprimerODemandeAide2(demande_aide d) {
-        String requete2 = "DELETE FROM demande_aide WHERE id_demande = "+d.getId_demande();
-        try {
-            PreparedStatement pst2 = cn2.prepareStatement(requete2);
-
-            // set the corresponding param
-            //pst2.setInt(1, id);
-            // execute the delete statement
-            pst2.executeUpdate();
-            
-                    if (pst2.executeUpdate()==1) {String reponse="Demande id"+d.getId_demande()+"supprimée!";
-            System.out.println(reponse);}
-            else {System.out.println("Erreur! Vérifier l'ID !");}
-        } catch (SQLException ex) {
-            System.out.println("Erreur! " + ex.getMessage());
-        }
-    }*/
+    
+    
     /**
      *
      * @param d
@@ -126,7 +108,7 @@ public class demande_aideCRUD {
         }
     }
 
-    public List<demande_aide> afficherDemandeAide() {
+    public ArrayList<demande_aide> afficherDemandeAide() {
         ArrayList<demande_aide> per = new ArrayList<>();
         try {
             String requete3 = "SELECT * FROM demande_aide";
@@ -146,61 +128,121 @@ public class demande_aideCRUD {
         return per;
     }
 
-    public demande_aide chercherDemandeAide(int id_demande) {
-        String requete = "select * from demande_aide where id_demande=?";
-        demande_aide d = new demande_aide();
-
+    public List<demande_aide> afficherDemandeAideTrie() {
+        ArrayList<demande_aide> per = new ArrayList<>();
         try {
-            PreparedStatement ps = cn2.prepareStatement(requete);
-            ps.setInt(1, id_demande);
-            ResultSet rs = ps.executeQuery();
+            String requete3 = "SELECT * FROM demande_aide  ORDER BY id_demande";
+            PreparedStatement pst2 = cn2.prepareStatement(requete3);
+            ResultSet rs = pst2.executeQuery();
+            while (rs.next()) {
+                demande_aide d = new demande_aide();
+                d.setId_demande(rs.getInt("id_demande"));
+                d.setTitre(rs.getString(2));
+                d.setDescription(rs.getString("description"));
+                d.setEtat(rs.getInt("etat"));
+                per.add(d);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return per;
+    }
+
+    
+    public demande_aide chercherDemandeAide5(int id_demande) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            String requete = "select * from demande_aide where id_demande=" + id_demande;
+            ps = cn2.prepareStatement(requete);
+            rs = ps.executeQuery();
             //On récupère les MetaData
 
-            System.out.println("\n**********************************");
-            if (rs.next() == false) {
-                return null;
-            } else {
-                while (rs.next()) {
-                    d.setId_demande(rs.getInt(id_demande));
-                    d.setTitre(rs.getString("titre"));
-                    d.setDescription(rs.getString("description"));
-                    d.setEtat(rs.getInt("etat"));
-                }
-                return d;
+            while (rs.next()) {
+                demande_aide d = new demande_aide((rs.getInt(1)), rs.getString(2), rs.getString(3), rs.getInt(4));
+                System.out.println(d);
             }
 
         } catch (SQLException ex) {
             System.out.println("Erreur lors de la recherche de votre demande" + ex.getMessage());
+        }
+        demande_aide d = null;
+        return d;
+    }
+
+    public User getConnectedUser() {
+        String requete = "select * from login ";
+        try {
+            PreparedStatement ps = cn2.prepareStatement(requete);
+
+            User u = new User();
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                switch (rs.getInt("type")) {
+                    case 1:
+                        Benevole b = new Benevole();
+                        b.setId(rs.getInt("id"));
+                        b.setType(rs.getInt("type"));
+                        b.setMdp(rs.getString("Mdp"));
+                        b.setUserName(rs.getString("username"));
+                        b.setNom(rs.getString("nom"));
+                        b.setPrenom(rs.getString("prenom"));
+                        b.setPays(rs.getString("pays"));
+                        b.setMail(rs.getString("mail"));
+                    
+
+                        b.setDateNaissance(rs.getDate("dateNaissance"));
+                        return b;
+
+                    case 2:
+                        Association a = new Association();
+                        a.setId(rs.getInt("id"));
+                        a.setType(rs.getInt("type"));
+                        a.setMdp(rs.getString("Mdp"));
+                        a.setUserName(rs.getString("username"));
+                        a.setNomAssociaiton(rs.getString("nomAssociaiton"));
+                        a.setRib(rs.getString("rib"));
+                        a.setAddresse(rs.getString("addresse"));
+                        a.setCategorie(rs.getString("categorie"));
+                        a.setMail(rs.getString("mail"));
+                        a.setLogo(rs.getString("logo"));
+                        a.setNumero(rs.getInt("numero"));
+                        a.setValide(rs.getBoolean("valide"));
+
+                        return a;
+
+                    case 3:
+                        CasSocial c = new CasSocial();
+                        c.setId(rs.getInt("id"));
+                        c.setType(rs.getInt("type"));
+                        c.setMdp(rs.getString("Mdp"));
+                        c.setUserName(rs.getString("username"));
+                        c.setDescriptionCasSocial(rs.getString("descriptionCasSocial"));
+                        c.setValide(rs.getBoolean("valide"));
+                        c.setIdCampement(rs.getInt("idcampement"));
+
+                        return c;
+
+                    case 4: {
+                        Administrateur A = new Administrateur();
+                        A.setId(rs.getInt("id"));
+                        A.setType(rs.getInt("type"));
+                        A.setMdp(rs.getString("Mdp"));
+                        A.setUserName(rs.getString("username"));
+                        return A;
+
+                    }
+                }
+
+            }
+            return null;
+
+        } catch (SQLException ex) {
+            System.out.println("erreur lors de la recherche d'un benevole" + ex.getMessage());
             return null;
         }
     }
-    
-    /*public demande_aide chercherDemandeAide(int id_demande) {
-        String requete = "select * from demande_aide where id_demande=?";
-        demande_aide d = new demande_aide();
-
-        try {
-            PreparedStatement ps = cn2.prepareStatement(requete);
-            ps.setInt(1, id_demande);
-            ResultSet rs = ps.executeQuery();
-            //On récupère les MetaData
-
-            //On récupère les MetaData
-            ResultSetMetaData resultMeta = rs.getMetaData();
-            while (rs.next()) {
-                for (int i = 1; i <= resultMeta.getColumnCount(); i++) {
-                    return (demande_aide) rs.getObject(i);
-                }
-
-            }
-
-            rs.close();
-            ps.close();
-            return null;
-        } catch (SQLException ex) {
-            System.out.println("Erreur lors de la recherche de votre demande" + ex.getMessage());
-            return null;
-        }
-    }*/
 
 }

@@ -57,8 +57,7 @@ public class LoginController implements Initializable {
        
          
             User u= uc.login(username.getText(), mdp.getText());
-            System.out.println(u);
-            if (u != null) {
+                        if (u != null) {
                 
                 if (u instanceof Benevole) {
                     Stage stage = (Stage) button_login.getScene().getWindow();
@@ -78,9 +77,11 @@ public class LoginController implements Initializable {
                 if (u instanceof Association) {
                     
                     Stage stage = (Stage) button_login.getScene().getWindow();
+                    System.out.println("testsetseteststetest");
                     stage.close();
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/AcceuilAssociation.fxml"));
                     Parent root1 = (Parent) fxmlLoader.load();
+                    
                     stage = new Stage();
                    // stage.initStyle(StageStyle.TRANSPARENT); //Pour faire disparaitre la barre de fermeture basique de Windows
 
@@ -92,9 +93,12 @@ public class LoginController implements Initializable {
 
                 }
                 if (u instanceof CasSocial) {
+                    
+                    System.out.println(u+"ezaraerraaaaaaaaaaaa");
+
                                         Stage stage = (Stage) button_login.getScene().getWindow();
                     stage.close();
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("toadd"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/Home_cas_social2.fxml"));
                     Parent root1 = (Parent) fxmlLoader.load();
                     stage = new Stage();
                     stage.initStyle(StageStyle.TRANSPARENT); //Pour faire disparaitre la barre de fermeture basique de Windows

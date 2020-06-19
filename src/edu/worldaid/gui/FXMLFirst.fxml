@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0">
          <image>
-            <Image url="@../images/bg_login.PNG" />
+            <Image url="@../../../images/bg_login.PNG" />
          </image>
       </ImageView>
       <AnchorPane layoutX="51.0" layoutY="146.0" prefHeight="309.0" prefWidth="694.0" style="-fx-background-color: rgba(234, 237, 255, 0.15); -fx-background-radius: 7;" AnchorPane.bottomAnchor="145.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="146.0">
@@ -47,9 +47,9 @@
                   <Font name="Lato Regular" size="11.0" />
                </font>
             </Button>
-            <VBox fx:id="vbox" layoutX="25.0" layoutY="-57.0" prefHeight="400.0" prefWidth="359.0" style="-fx-background-color: white; -fx-background-radius: 7;" />
+            <VBox fx:id="vbox" layoutX="21.0" layoutY="-35.0" prefHeight="400.0" prefWidth="359.0" style="-fx-background-color: white; -fx-background-radius: 7;" />
          </children></AnchorPane>
-      <ImageView fitHeight="113.0" fitWidth="139.0" layoutX="347.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="113.0" fitWidth="139.0" layoutX="353.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/logo.png" />
          </image>

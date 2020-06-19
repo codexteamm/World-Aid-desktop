@@ -322,7 +322,7 @@ public User getConnectedUser()
                         b.setPays(rs.getString("pays"));
                         b.setMail(rs.getString("mail"));
 
-                        b.setDateNaissance(rs.getTimestamp("dateNaissance").toLocalDateTime());
+                        b.setDateNaissance(rs.getDate("dateNaissance"));
                         return b;
 
                     case 2:

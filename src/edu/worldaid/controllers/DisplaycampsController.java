@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXDialog;
 import edu.worldaid.entities.Association;
 import edu.worldaid.entities.Campement;
 import edu.worldaid.services.CompementCrud;
+import edu.worldaid.services.UserCrud;
 import edu.worldaid.utils.JavamailUtilCampement;
 import java.io.IOException;
 import java.net.URL;
@@ -61,8 +62,7 @@ public class DisplaycampsController implements Initializable {
     private ImageView Profile_pic;
     @FXML
     private Label username;
-    @FXML
-    private Button Home;
+   
     @FXML
     private ImageView pic1;
     @FXML
@@ -76,8 +76,6 @@ public class DisplaycampsController implements Initializable {
     @FXML
     private Button predreChargeE;
     private Campement selected;
-    @FXML
-    private Button Add_Event2;
     @FXML
     private ImageView pic12;
     @FXML
@@ -93,7 +91,7 @@ public class DisplaycampsController implements Initializable {
     @FXML
     private ImageView pic121;
     @FXML
-    private VBox menu;
+    private Button Home1;
     @FXML
     private Button add_and_event;
     @FXML
@@ -101,9 +99,13 @@ public class DisplaycampsController implements Initializable {
     @FXML
     private Button showAllEvents;
     @FXML
+    private Button showcamp;
+    @FXML
     private Button settings;
     @FXML
     private Hyperlink help;
+    @FXML
+    private Button Requests;
 
 
     /**
@@ -153,16 +155,13 @@ public class DisplaycampsController implements Initializable {
             Parent root = loader.load();
             AcceuilAssociationController dpc = loader.getController();
 
-            Home.getScene().setRoot(root);
+            update.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(DisplaycampsController.class.getName()).log(Level.SEVERE, null, ex);
         }
                     
     }
 
-    @FXML
-    private void Add_an_opportunity(ActionEvent event) {
-    }
 
 
     @FXML
@@ -171,6 +170,21 @@ public class DisplaycampsController implements Initializable {
 
     @FXML
     private void logoutbutton(ActionEvent event) {
+                try {
+            UserCrud uc = new UserCrud();
+            uc.logout();
+
+            Parent intDM = FXMLLoader.load(getClass().getResource("/edu/worldaid/gui/FXMLFirst.fxml"));
+            Scene intDmScene = new Scene(intDM);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(intDmScene);
+            window.show();
+
+        } catch (IOException ex) {
+
+            System.out.println("erreur logout"+ex.getMessage());
+
+        }
     }
 
     @FXML
@@ -358,18 +372,7 @@ public class DisplaycampsController implements Initializable {
         }
     }
 
-    @FXML
-    private void showSupportedCamps(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/showSupportedcamps.fxml"));
-            Parent root = loader.load();
-            SowSupportedController dpc = loader.getController();
 
-            Home.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(DisplaycampsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     @FXML
     private void add_an_event(ActionEvent event) {
@@ -437,6 +440,37 @@ public class DisplaycampsController implements Initializable {
 
         }
         }
+
+    @FXML
+    private void showcamp(ActionEvent event) {
+    }
+
+    @FXML
+    private void Requests(ActionEvent event) {
+
+                      try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/displayRequests.fxml"));
+            Parent root = loader.load();
+            displayRequestsController dpc = loader.getController();
+
+            update.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(DisplaycampsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void showSupportedCamp(ActionEvent event) {
+                try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/showSupportedcamps.fxml"));
+            Parent root = loader.load();
+            SowSupportedController dpc = loader.getController();
+
+            search.getScene().setRoot(root);
+        } catch (IOException ex) {
+                    System.out.println(ex.getMessage());;
+        }
+    }
     
 
 }

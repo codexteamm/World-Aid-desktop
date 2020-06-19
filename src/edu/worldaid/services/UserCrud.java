@@ -12,6 +12,7 @@ import edu.worldaid.entities.CasSocial;
 import edu.worldaid.entities.User;
 import edu.worldaid.utils.MyConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,7 +51,7 @@ public class UserCrud {
                     pst.setString(3, b.getPays());
                     pst.setString(4, b.getMdp());
                     pst.setString(5, b.getMail());
-                    pst.setTimestamp(6, Timestamp.valueOf(b.getDateNaissance()));
+                    pst.setDate(6, (Date) b.getDateNaissance());
                     pst.setString(7, b.getUserName());
                     pst.setInt(8, b.getType());
                     pst.executeUpdate();
@@ -59,7 +60,7 @@ public class UserCrud {
                 case 2:
                     Association a = (Association) u;
 
-                    requete2 = "INSERT INTO login (userName ,mdp,type,nomAssociaiton,rib,categorie,mail,logo,numero,valide ,addresse)VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                    requete2 = "INSERT INTO user (userName ,mdp,type,nomAssociaiton,rib,categorie,mail,logo,numero,valide ,addresse)VALUES (?,?,?,?,?,?,?,?,?,?,?)";
                     pst = connection.prepareStatement(requete2);
                     pst.setString(1, a.getUserName());
                     pst.setString(2, a.getMdp());
@@ -115,15 +116,15 @@ public class UserCrud {
 
                 case 1:
                     Benevole b = (Benevole) u;
-                    requete2 = "INSERT INTO login (nom ,prenom,pays ,mail,mdp,dateNaissance,userName,type)VALUES (?,?,?,?,?,?,?,?)";
+                    requete2 = "INSERT INTO login (nom ,prenom,pays ,mail,mdp,dateNaissance,userName,type,id)VALUES (?,?,?,?,?,?,?,?,?)";
                     pst = connection.prepareStatement(requete2);
-
+                    pst.setInt(9, b.getId());
                     pst.setString(1, b.getNom());
                     pst.setString(2, b.getPrenom());
                     pst.setString(3, b.getPays());
                     pst.setString(4, b.getMdp());
                     pst.setString(5, b.getMail());
-                    pst.setTimestamp(6, Timestamp.valueOf(b.getDateNaissance()));
+                    pst.setDate(6, (Date) b.getDateNaissance());
                     pst.setString(7, b.getUserName());
                     pst.setInt(8, b.getType());
                     pst.executeUpdate();
@@ -132,7 +133,7 @@ public class UserCrud {
                 case 2:
                     Association a = (Association) u;
 
-                    requete2 = "INSERT INTO login (userName ,mdp,type,nomAssociaiton,rib,categorie,mail,logo,numero,valide ,addresse)VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                    requete2 = "INSERT INTO login (userName ,mdp,type,nomAssociaiton,rib,categorie,mail,logo,numero,valide ,addresse,id)VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
                     pst = connection.prepareStatement(requete2);
                     pst.setString(1, a.getUserName());
                     pst.setString(2, a.getMdp());
@@ -146,12 +147,14 @@ public class UserCrud {
                     pst.setInt(9, a.getNumero());
                     pst.setBoolean(10, a.getValide());
                     pst.setString(11, a.getAddresse());
+                    pst.setInt(12, a.getId());
                     pst.executeUpdate();
 
                     break;
                 case 3:
                     CasSocial c = (CasSocial) u;
-                    requete2 = "INSERT INTO login (userName ,mdp,type,descriptionCasSocial,valide,idcampement )VALUES (?,?,?,?,?,?)";
+                
+                    requete2 = "INSERT INTO login (userName ,mdp,type,descriptionCasSocial,valide,idcampement,id )VALUES (?,?,?,?,?,?,?)";
                     pst = connection.prepareStatement(requete2);
                     pst.setString(1, c.getUserName());
                     pst.setString(2, c.getMdp());
@@ -160,23 +163,25 @@ public class UserCrud {
                     pst.setString(4, c.getDescriptionCasSocial());
                     pst.setBoolean(5, c.getValide());
                     pst.setInt(6, c.getIdCampement());
+                    pst.setInt(7, c.getId());
                     pst.executeUpdate();
 
                     break;
                 case 4:
                     Administrateur A = (Administrateur) u;
-                    requete2 = "INSERT INTO login (mdp,username,type)VALUES (?,?,?)";
+                    requete2 = "INSERT INTO login (mdp,username,type)VALUES (?,?,?,?)";
                     pst = connection.prepareStatement(requete2);
                     pst.setString(1, A.getMdp());
                     pst.setString(2, A.getUserName());
                     pst.setInt(3, A.getType());
+                    pst.setInt(4, A.getId());
                     pst.executeUpdate();
                     break;
 
             }
 
         } catch (SQLException ex) {
-            System.out.println(ex);
+            System.out.println(ex.getMessage()+"logintest");
         }
     }
 
@@ -190,7 +195,7 @@ public class UserCrud {
             pst.setString(3, b.getPays());
             pst.setString(4, b.getMdp());
             pst.setString(5, b.getMail());
-            pst.setTimestamp(6, Timestamp.valueOf(b.getDateNaissance()));
+                    pst.setDate(6, (Date) b.getDateNaissance());
             pst.setString(7, b.getUserName());
             pst.setInt(8, b.getType());
             pst.setInt(9, idBenevole);
@@ -265,7 +270,8 @@ public class UserCrud {
                         b.setPays(rs.getString("pays"));
                         b.setMail(rs.getString("mail"));
 
-                        b.setDateNaissance(rs.getTimestamp("dateNaissance").toLocalDateTime());
+                        b.setDateNaissance(rs.getDate("dateNaissance"));
+                        
                         return b;
 
                     case 2:
@@ -371,7 +377,7 @@ public class UserCrud {
                         b.setPays(rs.getString("pays"));
                         b.setMail(rs.getString("mail"));
 
-                        b.setDateNaissance(rs.getTimestamp("dateNaissance").toLocalDateTime());
+                        b.setDateNaissance(rs.getDate("dateNaissance"));
                         return b;
 
                     case 2:
@@ -422,8 +428,21 @@ public class UserCrud {
             return null;
         }
     }
+    public void logout (){
+ String requete2 = "delete from login";
+        try {
+            PreparedStatement pst2 = connection.prepareStatement(requete2);
 
-    boolean checkUserName(String userName) {
+            pst2.executeUpdate();
+            System.out.println("logout effectuer");
+        } catch (SQLException ex) {
+            System.out.println("erreur lors de logout" + ex.getMessage());
+        }
+        
+    }
+            
+
+   public boolean checkUserName(String userName) {
         try {
             String requete3 = "SELECT * FROM user WHERE userName=? ";
             PreparedStatement pst2 = connection.prepareStatement(requete3);
@@ -439,5 +458,7 @@ public class UserCrud {
         }
          return true;
     }
+
+
 
 }

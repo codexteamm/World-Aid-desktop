@@ -22,6 +22,15 @@ public class demande_aide {
         this.etat = etat;
     }
 
+    public demande_aide(int id_demande, String titre, String description, int etat) {
+        this.id_demande = id_demande;
+        this.titre = titre;
+        this.description = description;
+        this.etat = etat;
+    }
+    
+    
+
     public demande_aide() {
     }
 

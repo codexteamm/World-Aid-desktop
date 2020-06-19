@@ -3,15 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/entities/Association.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/images/logo.png</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/FirstController.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/entities/CasSocial.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/InscBenController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/AcceuilAssociationController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/displayRequestsController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/helpCenter.fxml</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/SowSupportedController.java</file>
             <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/LoginController.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/entities/Administrateur.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/DisplayEventsController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/entities/User.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/displayCamps.fxml</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/DisplayAllEventsController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/DisplaycampsController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/InscCasController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/SignUpController.java</file>
             <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/services/UserCrud.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/services/AdminCrud.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/Login.fxml</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/InscBen.fxml</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/AcceuilAssociation.fxml</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/controllers/InscAssoController.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/InscCas.fxml</file>
             <file>file:/C:/Users/HP/Documents/NetBeansProjects/WorldAid/src/edu/worldaid/gui/WorldAid.java</file>
         </group>
     </open-files>

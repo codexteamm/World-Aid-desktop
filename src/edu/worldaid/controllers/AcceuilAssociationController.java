@@ -55,6 +55,10 @@ public class AcceuilAssociationController implements Initializable {
     private Button Add_Camps;
     @FXML
     private Button setting;
+    @FXML
+    private Button home;
+    @FXML
+    private Button Requests;
 
     public String getType() {
         return type.getText();
@@ -139,9 +143,11 @@ public class AcceuilAssociationController implements Initializable {
             FXMLLoader detail = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/Add_Events.fxml"));
             // System.out.println("err1");
             Parent root2 = (Parent) detail.load();
+            
             //System.out.println("err2");
             Stage stage1 = new Stage();
             stage1.setScene(new Scene(root2));
+            stage1.initStyle(StageStyle.TRANSPARENT);
             //System.out.println("err3");
             stage1.setOnCloseRequest(e -> Platform.exit());
 
@@ -158,6 +164,7 @@ public class AcceuilAssociationController implements Initializable {
             FXMLLoader detail = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/displayEvents.fxml"));
             Parent root2 = (Parent) detail.load();
             Stage stage1 = new Stage();
+            stage1.initStyle(StageStyle.TRANSPARENT);
             stage1.setScene(new Scene(root2));
             stage1.setOnCloseRequest(e -> Platform.exit());
             stage1.show();
@@ -168,9 +175,23 @@ public class AcceuilAssociationController implements Initializable {
 
     }
 
-
     @FXML
     private void logoutbutton(ActionEvent event) {
+        try {
+            UserCrud uc = new UserCrud();
+            uc.logout();
+
+            Parent intDM = FXMLLoader.load(getClass().getResource("/edu/worldaid/gui/FXMLFirst.fxml"));
+            Scene intDmScene = new Scene(intDM);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(intDmScene);
+            window.show();
+
+        } catch (IOException ex) {
+
+            System.out.println("erreur logout"+ex.getMessage());
+
+        }
     }
 
     @FXML
@@ -196,7 +217,8 @@ public class AcceuilAssociationController implements Initializable {
     private void mute(ActionEvent event) {
 
     }
-/*
+
+    /*
     public static void PlayNotification(String fileNotif) {
         String musicFile = "\\c:\\sounds\\" + fileNotif;     // For example
 
@@ -205,7 +227,7 @@ public class AcceuilAssociationController implements Initializable {
         mediaPlayer.play();
 
     }
-*/
+     */
     @FXML
     private void showAllEvents(ActionEvent event) {
         try {
@@ -214,6 +236,7 @@ public class AcceuilAssociationController implements Initializable {
 
             Parent root2 = (Parent) detail.load();
             Stage stage1 = new Stage();
+            stage1.initStyle(StageStyle.TRANSPARENT);
             stage1.setScene(new Scene(root2));
             stage1.setOnCloseRequest(e -> Platform.exit());
             stage1.show();
@@ -224,22 +247,13 @@ public class AcceuilAssociationController implements Initializable {
 
     }
 
-    @FXML
-    private void Add_an_opportunity(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/displayCamps.fxml"));
-            Parent root = loader.load();
-            DisplaycampsController dpc = loader.getController();
-
-            Add_Event2.getScene().setRoot(root);
-        } catch (IOException ex) {
-            Logger.getLogger(ex.getMessage());
-        }
-    }
+    /*private void Add_an_opportunity(ActionEvent event) {
+        
+    }*/
 
     @FXML
     private void showSupportedCamps(ActionEvent event) {
-                try {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/showSupportedcamps.fxml"));
             Parent root = loader.load();
             SowSupportedController dpc = loader.getController();
@@ -271,4 +285,30 @@ public class AcceuilAssociationController implements Initializable {
     private void setting(ActionEvent event) {
     }
 
+    @FXML
+    private void Requests(ActionEvent event) {
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/displayRequests.fxml"));
+            Parent root = loader.load();
+            displayRequestsController dpc = loader.getController();
+
+            Add_Event2.getScene().setRoot(root);
+        } catch (IOException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+       
+
+    }
+
+    @FXML
+    private void showCamps(ActionEvent event) {
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/worldaid/gui/displayCamps.fxml"));
+            Parent root = loader.load();
+            DisplaycampsController dpc = loader.getController();
+
+            add_and_event.getScene().setRoot(root);
+        } catch (IOException ex) {
+             System.out.println("rfrf");        }
+    }
 }
